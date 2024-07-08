@@ -25,22 +25,6 @@ app.get('/smoothies', (req, res) => res.render('smoothies', { title: 'Smoothies 
 
 app.use(authRoutes);
 
-// cookies
-
-app.get('/set-cookies', (req, res) => {
-	// res.setHeader('Set-Cookie', 'newUser=true');
-	res.cookie('newUser', true);
-	res.cookie('isEmployee', true, { maxAge: 1000 * 133, httpOnly: true });
-	res.send('you got he cookies!');
-});
-
-app.get('/read-cookies', (req, res) => {
-	const cookies = req.cookies;
-	console.log(cookies);
-
-	res.json(cookies);
-});
-
 // 404 error
 app.use((req, res) => {
 	res.status(404).render('404', { title: '404' });
