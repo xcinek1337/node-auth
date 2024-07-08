@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const authRoutes = require('./routes/authRoutes');
 const cookieParser = require('cookie-parser');
+const { requireAuth } = require('./middleware/authMiddleware');
 
 const app = express();
 
@@ -21,7 +22,7 @@ mongoose
 // routes
 app.get('/', (req, res) => res.render('home', { title: 'Home' }));
 
-app.get('/smoothies', (req, res) => res.render('smoothies', { title: 'Smoothies recipes' }));
+app.get('/smoothies', requireAuth, (req, res) => res.render('smoothies', { title: 'Smoothies recipes' }));
 
 app.use(authRoutes);
 
